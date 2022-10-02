@@ -60,7 +60,9 @@ function loginReducer (state: loginState, action: loginAction) {
         case 'logout': 
             return {
                 ...state,
-                isLoggedIn: false
+                isLoggedIn: false,
+                username: '',
+                password: ''
             }
         default:
             return state
@@ -70,6 +72,7 @@ function loginReducer (state: loginState, action: loginAction) {
 const LoginWithUseReducer: React.FC  = () => {
   
   const [state, dispatch] = useReducer(loginReducer, initialState)
+  const { isLoggedIn, isLoading, error, username, password } = state;
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -85,9 +88,7 @@ const LoginWithUseReducer: React.FC  = () => {
     }
    
     dispatch({ type: 'login-done' })
-  }   
-
-  const { isLoggedIn, isLoading, error, username, password } = state;
+  }  
 
   return (
     <div className='App'>
