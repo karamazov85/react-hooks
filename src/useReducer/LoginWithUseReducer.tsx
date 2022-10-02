@@ -1,6 +1,20 @@
-import { useReducer, } from 'react';
+import React, { useReducer } from 'react';
 import { logIn } from '../utils/login';
 
+
+interface loginState {
+    username:string;
+    password: string;
+    isLoggedIn: boolean;
+    isLoading: boolean;
+    error: string; 
+}
+
+type loginAction = 
+{ type: 'login-start' | 'login-success' | 'login-done' | 'logout' } 
+| { type: 'input-change-username'; payload: string }
+| { type: 'input-change-password'; payload: string }
+| { type: 'login-error'; payload: string }
 
 const initialState = {
     username:'',
@@ -10,7 +24,7 @@ const initialState = {
     error: ''
 }
 
-export function loginReducer (state, action) {
+function loginReducer (state: loginState, action: loginAction) {
     switch (action.type) {
         case 'input-change-username': 
             return {
@@ -53,11 +67,11 @@ export function loginReducer (state, action) {
     }
 }
 
-export default function LoginWithUseReducer() {
+const LoginWithUseReducer: React.FC  = () => {
   
   const [state, dispatch] = useReducer(loginReducer, initialState)
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     dispatch({ type: 'login-start' })
@@ -93,14 +107,14 @@ export default function LoginWithUseReducer() {
               type='text'
               placeholder='username'
               value={username}
-              onChange={(e) => dispatch({ type: 'input-change-username', payload: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch({ type: 'input-change-username', payload: e.target.value })}
             />
             <input
               type='password'
               placeholder='password'
               autoComplete='new-password'
               value={password}
-              onChange={(e) => dispatch({ type: 'input-change-password', payload: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch({ type: 'input-change-password', payload: e.target.value })}
             />
             <button className='submit' type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
@@ -111,3 +125,5 @@ export default function LoginWithUseReducer() {
     </div>
   );
 }
+
+export default LoginWithUseReducer;
