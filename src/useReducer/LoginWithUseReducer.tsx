@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
 import { logIn } from '../utils/login';
 
-
 interface loginState {
     username:string;
     password: string;

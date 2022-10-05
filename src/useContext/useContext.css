@@ -1,0 +1,44 @@
+html {
+    box-sizing: border-box;
+}
+
+.container {
+    margin: .5rem auto;
+    padding: 1rem 1rem; 
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+h1,
+h2,
+p,
+ul {
+    margin: 0;
+}
+
+nav {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: start;
+    gap: 1em;
+    padding: 1rem 0;
+}
+
+.flow-content > * + * {
+    margin-top: 1.5rem;
+    line-height: 1.2;
+}
+
+.dark {
+    color: white;
+    background-color: black;
+}
+
+.basic {
+    color: black;
+    background-color:aquamarine;
+}
